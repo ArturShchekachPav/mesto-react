@@ -2,11 +2,11 @@ import {useState, useEffect} from "react";
 import api from "../utils/api";
 import Card from "./Card";
 
-function Main(props) {
+function Main({onCardClick, onAddPlace, onEditProfile, onEditAvatar}) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
-  const  [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     Promise.all([api.getInitialCards(),
@@ -33,8 +33,9 @@ function Main(props) {
   return (
     <main className="main page__main">
       <section className="profile">
-        <div className="profile__avatar-button"
-             onClick={props.onEditAvatar}
+        <div
+          className="profile__avatar-button"
+          onClick={onEditAvatar}
         >
           <img
             className="profile__avatar"
@@ -49,7 +50,7 @@ function Main(props) {
               aria-label="Редактировать"
               className="profile__edit-button hover"
               type="button"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             ></button>
           </div>
           <p className="profile__job">{userDescription}</p>
@@ -58,12 +59,16 @@ function Main(props) {
           aria-label="Добавить"
           className="profile__add-button hover"
           type="button"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section className="elements main__elements">
         {cards.map((card) => (
-          <Card card={card} onCardClick={props.onCardClick} />
+          <Card
+            card={card}
+            onCardClick={onCardClick}
+            key={card._id}
+          />
         ))}
       </section>
     </main>
