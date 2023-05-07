@@ -17,4 +17,4 @@ Git, JavaScript, СSS, HTML, Webpack, Api, CRA, React
 
 ООП, БЭМ, Ассинхронность, Декларативный подход
 
-Сcылка на страницу в GitHub Pages: https://arturshchekachpav.github.io/mesto/
+Сcылка на страницу в GitHub Pages: https://arturshchekachpav.github.io/mesto-react/
