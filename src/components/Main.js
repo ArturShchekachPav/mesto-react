@@ -1,28 +1,16 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import api from "../utils/api";
 import Card from "./Card";
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main({onCardClick, onAddPlace, onEditProfile, onEditAvatar}) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
   const [cards, setCards] = useState([]);
+  
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    Promise.all([api.getInitialCards(),
-      api.getProfileData()
-    ])
-      .then(([cards, {
-        about,
-        avatar,
-        name,
-        _id
-      }
-             ]) => {
-        setUserName(name);
-        setUserDescription(about);
-        setUserAvatar(avatar);
-
+    api.getInitialCards()
+      .then((cards) => {
         setCards(cards);
       })
       .catch(err => {
@@ -39,13 +27,13 @@ function Main({onCardClick, onAddPlace, onEditProfile, onEditAvatar}) {
         >
           <img
             className="profile__avatar"
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="Фото профиля"
           />
         </div>
         <div className="profile__info">
           <div className="profile__header">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               aria-label="Редактировать"
               className="profile__edit-button hover"
@@ -53,7 +41,7 @@ function Main({onCardClick, onAddPlace, onEditProfile, onEditAvatar}) {
               onClick={onEditProfile}
             ></button>
           </div>
-          <p className="profile__job">{userDescription}</p>
+          <p className="profile__job">{currentUser.about}</p>
         </div>
         <button
           aria-label="Добавить"
