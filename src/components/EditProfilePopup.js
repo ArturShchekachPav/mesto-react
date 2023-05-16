@@ -9,7 +9,8 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 const EditProfilePopup = ({
 	isOpen,
 	onClose,
-	onUpdateUser
+	onUpdateUser,
+	isLoading
 }) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
@@ -38,7 +39,9 @@ const EditProfilePopup = ({
 			title="Редактировать профиль"
 			isOpen={isOpen}
 			onClose={onClose}
-			buttonText="Сохранить"
+			buttonText={isLoading ?
+				'Сохранение...' :
+				'Сохранить'}
 			onSubmit={handleSubmit}
 		>
 			<div className="popup__form-item">
