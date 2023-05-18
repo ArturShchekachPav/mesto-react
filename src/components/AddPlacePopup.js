@@ -1,5 +1,8 @@
 import PopupWithForm from './PopupWithForm';
-import {useState} from 'react';
+import {
+	useEffect,
+	useState
+} from 'react';
 
 const AddPlacePopup = ({
 	isOpen,
@@ -10,15 +13,17 @@ const AddPlacePopup = ({
 	const [name, setName] = useState('');
 	const [link, setLink] = useState('');
 	
+	useEffect(() => {
+		setLink('');
+		setName('');
+	}, [isOpen]);
+	
 	function handleSubmit(e) {
 		e.preventDefault();
 		
 		onAddPlace(name,
 			link
 		);
-		
-		setLink('');
-		setName('');
 	}
 	
 	return (
@@ -40,7 +45,7 @@ const AddPlacePopup = ({
 					className="popup__input popup__input_card_title"
 					placeholder="Название"
 					minLength="2"
-					maxLength="40"
+					maxLength="30"
 					required
 					value={name}
 					onChange={(e) => {setName(e.target.value);}}
