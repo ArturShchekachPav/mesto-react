@@ -13,8 +13,10 @@ const EditAvatarPopup = ({
 	const inputRef = useRef(null);
 	
 	useEffect(() => {
-		inputRef.current.value = null;
-	}, [isOpen]);
+			inputRef.current.value = null;
+		},
+		[isOpen]
+	);
 	
 	function handleSubmit(e) {
 		e.preventDefault();

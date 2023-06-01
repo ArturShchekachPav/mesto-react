@@ -14,9 +14,11 @@ const AddPlacePopup = ({
 	const [link, setLink] = useState('');
 	
 	useEffect(() => {
-		setLink('');
-		setName('');
-	}, [isOpen]);
+			setLink('');
+			setName('');
+		},
+		[isOpen]
+	);
 	
 	function handleSubmit(e) {
 		e.preventDefault();
