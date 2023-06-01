@@ -308,16 +308,6 @@ function App() {
 		handleTokenCheck();
 	};
 	
-	if (isLoggedIn === null) {
-		return (
-			<main className="main login page__login">
-				<div className="login__container">
-					<h1 className="login__title">Загрузка...</h1>
-				</div>
-			</main>
-		);
-	}
-	
 	return (
 		<CurrentUserContext.Provider value={currentUser}>
 			<div className="page">
@@ -325,6 +315,13 @@ function App() {
 					email={userEmail}
 					singOut={handleSingOut}
 				/>
+				{isLoggedIn === null && (
+					<main className="main login page__login">
+						<div className="login__container">
+							<h1 className="login__title">Загрузка...</h1>
+						</div>
+					</main>
+				)}
 				<Routes>
 					<Route
 						path="/sign-up"
